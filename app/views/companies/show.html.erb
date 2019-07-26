@@ -1,0 +1,61 @@
+<p id="notice"><%= notice %></p>
+<h1>
+  <strong>Compania</strong>
+  <%= @company.name %>
+</h1>
+
+<table class="table table-dark">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Apellido</th>
+      <th scope="col">Mail</th>
+      <th scope="col">Area</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @company.employees.each do |employee| %>
+    <tr>
+      <th scope="row">1</th>
+      <td><%= employee.first_name %></td>
+      <td><%= employee.last_name %></td>
+      <td><%= employee.email %></td>
+      <td><%= employee.area.name %></td>
+      <td><%= link_to "ELIMINAR", company_employee_path(@company,employee), method: :delete, id: 'valores' %></td>
+    </tr>
+  </tbody>
+  <% end %>
+</table>
+
+<%= form_with(model: [@company,Employee.new], local: true) do |form| %>
+  <%= form.hidden_field :company_id, value: @company.id%>
+
+  <div class="field">
+    <%= form.label :first_name %>
+    <%= form.text_field :first_name, id: :employee_first_name %>
+  </div>
+  <div class="field">
+    <%= form.label :label_name %>
+    <%= form.text_field :last_name, id: :employee_last_name %>
+  </div>yebug
+  <div class="field">
+    <%= form.label :email %>
+    <%= form.email_field :email, id: :employee_email %>
+  </div>
+  <div class="field">
+    <%= form.label :area_id %>
+    <%= form.select :area_id, Area.pluck(:name,:id)%>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+
+
+
+
+
+<%= link_to 'Edit', edit_company_path(@company) %> |
+<%= link_to 'Back', companies_path %>

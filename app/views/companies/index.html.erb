@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Companies</h1>
+
+<table class="table table-dark">
+  <thead>
+    <tr>
+      <th scope="col">Nombre</th>
+      <th scope="col">Personal</th>
+    </tr>
+  </thead>
+  <tbody>
+      <% @companies.each do |company| %>
+        <tr>
+          <td><%= link_to company.name, company, id: 'valores' %></td>
+          <td><%= company.employees.count %></td>
+          <td><%= link_to 'Edit', edit_company_path(company), id: 'valores' %></td>
+          <td><%= link_to 'Destroy', company, method: :delete, data: { confirm: 'Are you sure?' }, id: 'valores' %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+<br>
